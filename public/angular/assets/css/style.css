@@ -1,0 +1,198 @@
+body {
+  font-family: Gisha, sans-serif;
+  direction: rtl;
+}
+
+.green {
+  background-color: #478700;
+}
+
+.logobar {
+  height: 70px;
+  background-image: url('../img/logo.png');
+  background-size: 78px;
+  background-repeat: no-repeat;
+  position: relative;
+  bottom: 4px;
+  left: 2px;
+}
+
+.logobar p {
+  color: #fff;
+  font-size: 1.9em;
+  position: relative;
+  top: 30%;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.navbar-default {
+  /*margin-top: 15px;*/
+  font-size: 1.4em;
+  background-color: #fff;
+  border-style: none;
+}
+
+.navbar-default p {
+  /*margin-bottom: 1px;*/
+  display: inline;
+  margin-left: 10px;
+}
+
+#logout {
+  float: left;
+  color: green;
+}
+
+#navbar {
+  margin-top: 15px;
+}
+
+#navbar a {
+  text-decoration: none;
+  color: green;
+  padding: 10px;
+}
+
+#navbar a:hover {
+  border-radius: 0;
+  border-bottom: darkgreen solid 3px;
+  margin-bottom: 0px;
+}
+
+#leftnav {
+  margin-top: 15px;
+}
+
+.grey {
+  background-color: lightgray;
+}
+
+.breadcrumb {
+  background-color: lightgray;
+  border-style: none;
+  text-align: right;
+}
+
+.breadcrumb a {
+  color: green;
+  font-weight: bold;
+}
+
+.breadcrumb>li+li:before {
+  color: darkgray;
+  content: "\002F\00a0";
+}
+
+.breadcrumb>.active {
+  color: #000000;
+}
+
+.green-text {
+  color: green;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.indent {
+  margin-right: 7%;
+}
+
+.btn-success {
+  background-color: green;
+}
+
+thead th {
+  text-align: right;
+  color: green;
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+
+table {
+  margin-top: 7px;
+}
+
+form {
+  margin-bottom: 15px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.ltr {
+  direction: ltr;
+}
+
+.pagination>li.active>a {
+  background: green;
+  color: #fff;
+  border-color: darkgreen;
+}
+
+.pagination>li>a {
+  color: green;
+}
+
+.pagination>li.active>a:hover {
+  background: lightgreen;
+  border-color: lightgrey;
+  color: #fff;
+}
+
+.glyphicon-plus-sign {
+  font-size: 1.5em;
+  color: green;
+}
+
+.glyphicon-minus-sign {
+  font-size: 1.5em;
+  color: green;
+}
+
+.mainrow {
+  margin-top: -12px;
+  padding-bottom: 20px;
+}
+
+.footer {
+  font-size: 1.2em;
+  padding: 10px;
+}
+
+.delimiter {
+  margin-left: 2px;
+  margin-right: 2px;
+  display: inline;
+}
+
+#footer-link {
+  color: green;
+}
+
+.table-three-striped>tbody>tr:nth-child(4n+1) {
+  background-color: #f9f9f9;
+}
+
+.hiderow input, .hiderow textarea, .hiderow select, .hiderow p {
+  width: 100%;
+}
+
+.meetingSaveBtn {
+  padding-left: 25px;
+  padding-right: 25px;
+  float: left;
+}
+
+#openFields1, #openFields2, #openFields3, #openFields4, #openFields5 {
+  cursor: pointer;
+}

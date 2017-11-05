@@ -1,0 +1,24 @@
+<div class="row grey centered footer ">
+  <!-- <a id="footer-link" href="#">מפת אתר</a>
+  <p class="delimiter">| 0.1</p> -->
+  <p class="delimiter">Developed by Or Dabool &copy;</p>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    var moreSearchFields = false;
+    var moreInputFields = false;
+
+    $('#moreSearchFieldsDiv').hide();
+
+    $('#moreSearchFieldsBtn').click(function(e) {
+      e.preventDefault();
+      $('#moreSearchFieldsDiv').toggle();
+      $('#moreSearchFieldsIcon').toggleClass('glyphicon-plus');
+      $('#moreSearchFieldsIcon').toggleClass('glyphicon-minus');
+    });
+
+  }); //document.ready
+</script>
