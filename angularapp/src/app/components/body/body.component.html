@@ -1,9 +1,14 @@
+<!-- Main Row for the input fields -->
 <div class="row grey mainrow">
   <div class="container">
+    <!-- Headers -->
     <h2 class="green-text bold indent">דיווח הטמעה</h2>
     <h3 class="green-text indent">איתור חניך לפי:</h3>
 
+    <!-- Input form -->
     <form>
+
+      <!-- Project and ID div -->
       <div class="indent col-md-6 col-md-offset-6 col-xs-10 col-xs-offset-2 right">
         <div class="form-group">
           <label for="selectedProjectName">פרוייקט:</label>
@@ -11,12 +16,19 @@
               <option *ngFor='let project of user.projects' value="{{project}}">{{project}}</option>
           </select>
         </div>
+
+        <!-- ID div -->
         <div class="form-group">
           <label for="enteredID">מספר זהות:</label>
           <input name="enteredID" (keyup.enter)="searchPerformed()" [(ngModel)]="enteredID" type="text" class="form-control" id="enteredID">
         </div>
+
       </div>
+
+      <!-- More Search fields div -->
       <div id="moreSearchFieldsDiv">
+
+        <!-- District div -->
         <div class="indent col-md-2 col-xs-10 right">
           <div class="form-group">
             <label for="district">מחוז</label>
@@ -28,6 +40,8 @@
         </div>
 
         <div class="col-md-offset-1 col-xs-offset-2"></div>
+
+        <!-- Department div -->
         <div class="indent col-md-2 col-xs-10 right">
           <div class="form-group">
             <label for="selectedDepartment">מחלקה</label>
@@ -37,7 +51,10 @@
             </select>
           </div>
         </div>
+
         <div class="col-md-offset-1 col-xs-offset-2"></div>
+
+        <!-- Module div -->
         <div class="indent col-md-2 col-xs-10 right">
           <div class="form-group">
             <label for="module">מודול</label>
@@ -47,7 +64,10 @@
             </select>
           </div>
         </div>
+
         <div class="col-md-offset-1 col-xs-offset-2"></div>
+
+        <!-- Course div -->
         <div class="indent col-md-2 col-xs-10 right">
           <div class="form-group">
             <label for="selectedCourseId">קורס</label>
@@ -57,9 +77,13 @@
             </select>
           </div>
         </div>
-        <div class="col-md-offset-1 col-xs-offset-2"></div>
-      </div>
 
+        <div class="col-md-offset-1 col-xs-offset-2"></div>
+
+      </div>
+      <!-- End of more search fields -->
+
+      <!-- 'Search' & 'Advanced search' div -->
       <div class="indent col-md-offset-2 col-md-10 col-xs-offset-2 col-xs-10 right">
         <a href="#" (click)="searchPerformed()" class="btn btn-primary">חיפוש</a>
         <a href="#" class="btn btn-success" id="moreSearchFieldsBtn"><span id="moreSearchFieldsIcon" class="glyphicon glyphicon-plus"></span> חיפוש מתקדם</a>
@@ -67,9 +91,9 @@
 
     </form>
   </div>
-</div>
+</div> <!-- End of mainrow -->
 
-
+<!-- No Search div -->
 <div *ngIf="!didPerformSearch" class="row">
   <div class="container" style="text-align: center">
     <br><br>
@@ -78,15 +102,22 @@
   </div>
 </div>
 
+<!-- Results div -->
 <div *ngIf="didPerformSearch" class="row">
   <div class="container">
+
+    <!-- No results div -->
     <div style="font-weight: bold; font-size: 20px; direction: rtl; text-align: center; margin: auto;" *ngIf="trainees.length == 0" class="row">
       <h3>לא נמצאו תוצאות חיפוש</h3>
       <img style="width:220px; height: 220px;" src=".\assets\img\notFound.png" alt="Not Found">
       <br><br>
     </div>
+
     <div *ngIf="trainees.length != 0" class="table-responsive">
+
       <table class="table table-three-striped table-hover">
+
+        <!-- Table headers -->
         <thead>
           <th></th>
           <th>מספר זהות</th>
@@ -98,7 +129,10 @@
           <th>מחלקה</th>
         </thead>
 
+        <!-- Table's body - from the results -->
         <tbody *ngFor="let trainee of trainees">
+
+          <!-- Trainee detailes row -->
           <tr>
             <td class="centered">
               <span style="cursor:pointer;" *ngIf="!trainee.isOpen" (click)="trainee.isOpen = !trainee.isOpen" class="glyphicon glyphicon-plus-sign"></span>
@@ -113,20 +147,27 @@
             <td>{{trainee.department}}</td>
           </tr>
 
+          <!-- Courses detailes row (row for each course) -->
           <tr *ngFor="let course of trainee.courses" class="hiderow">
             <!--hiderow -->
             <td *ngIf="trainee.isOpen" colspan="11">
+
+              <!-- Implementation date -->
               <div class="col-md-6 col-xs-12 form-group">
                 <label for="date" class="bold">תאריך עדכון אחרון:</label>
                 <br>
                 <input type="date" class="form-control" (change)="dateChanged($event, course)" name="date" value="{{course.assimilationDate}}" id="date">
               </div>
+
+              <!-- Course name -->
               <div class="col-md-6 col-xs-12 form-group">
                 <label for="comments" class="bold">קורס:</label>
                 <br>
                 <!-- <input type="text" class="form-control" value="{{course.shortName}}" name="comments" id="comments"> -->
                 <p class="centered" style="font-size: 140%; font-weight: bold;">{{course.shortName}}</p>
               </div>
+
+              <!-- Proccesses table -->
               <div class="col-md-12 table-responsive">
                 <table class="table table-striped">
                   <thead>
@@ -136,53 +177,46 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let process of course.processes; let i = index">
+
+                      <!-- Proccess name -->
                       <td>
                         <p>{{process}}</p>
                       </td>
+
+                      <!-- Status select box -->
                       <td>
                         <div class="form-group">
                           <select class="form-control" name="" (change)="statusChanged($event, course, i)" value={{course.assimilationStatuses[i]}}>
-                          <option value="not-selected">בחר מצב מהרשימה</option>
-                          <option *ngFor='let assimilationStatus of selectedProject.assimilationStatuses' value="{{assimilationStatus}}">{{assimilationStatus}}</option>
-                        </select></div>
+                            <option value="not-selected">בחר מצב מהרשימה</option>
+                            <option *ngFor='let assimilationStatus of selectedProject.assimilationStatuses'   value="{{assimilationStatus}}">{{assimilationStatus}}</option>
+                          </select>
+                        </div>
                       </td>
+
+                      <!-- Proccess note -->
                       <td>
                         <div class="form-group">
                           <textarea class="form-control" name="name" rows="5" (change)="noteChanged($event, course, i)">{{course.notes[i]}}</textarea>
                         </div>
                       </td>
+
                     </tr>
                   </tbody>
                 </table>
               </div>
+
+              <!-- Save course button -->
               <div class="col-md-12">
                 <a href="#" (click)="savePerformed(trainee, course)" class="btn btn-success meetingSaveBtn">שמור</a>
               </div>
+
             </td>
           </tr>
-          <!--hiderow -->
+
         </tbody>
       </table>
-      <!-- <nav class="centered ltr" aria-label="Page navigation">
-        <ul class="pagination">
-          <li>
-            <a href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li *ngFor="let page of pages" [ngClass]="{'active' : page=='1'}"><a href="#">{{page}}</a></li>
-          <!-- class="active" -->
-          <!-- <li>
-            <a href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav> -->
     </div>
-
-
-
 
   </div>
 </div>
+<!-- End of results div -->
