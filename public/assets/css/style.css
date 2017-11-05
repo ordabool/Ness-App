@@ -149,6 +149,20 @@ form {
   color: #fff;
 }
 
+.pagination a:focus {
+    background: green !important;
+}
+
+.pagination .no-bg a:focus {
+    background: white !important;
+}
+
+
+.pagination .active a {
+    color: white !important;
+    cursor: default !important;
+}
+
 .glyphicon-plus-sign {
   font-size: 1.5em;
   color: green;

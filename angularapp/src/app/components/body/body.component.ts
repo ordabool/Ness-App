@@ -86,7 +86,7 @@ export class BodyComponent implements OnInit {
   selectedPage;
 
   //Setting the number of results per page
-  resultsPerPage = 10;
+  resultsPerPage = 2;
 
   //Declaring the selected module variable
   selectedModule: string;
@@ -99,6 +99,9 @@ export class BodyComponent implements OnInit {
 
   //Declaring the trainees array (here goes the API's result)
   trainees : Trainee[] = [];
+
+  //Declaring the visible trainees for the page
+  visibleTraineesForPage = []
 
   //Declaring a variable for the request from the API. NOTE: this is necessery
   //due to the need in using "unsubscribe()"
@@ -219,7 +222,9 @@ export class BodyComponent implements OnInit {
   searchPerformed(){
 
     //Resets the previous results
+    this.pages = []
     this.trainees = [];
+    this.visibleTraineesForPage=[];
     this.didPerformSearch = true;
     if(this.getRequest){
       this.getRequest.unsubscribe();
@@ -273,6 +278,9 @@ export class BodyComponent implements OnInit {
         myTrainee.isOpen = false;
 
         this.trainees.push(myTrainee);
+        if (i == trainees.length-1){
+          this.pageChanged(1);
+        }
       }
     });
   }
@@ -308,6 +316,38 @@ export class BodyComponent implements OnInit {
 
   dateChanged(event, course){
     course.assimilationDate = event.target.value;
+  }
+
+
+  //Changes the page, and the results
+  pageChanged(page){
+    // console.log(page);
+    this.visibleTraineesForPage=[];
+    this.selectedPage = page;
+    var num = ((page-1)*this.resultsPerPage);
+
+    for(var i=0;i<this.resultsPerPage; i++){
+      if(this.trainees[num]){
+        this.visibleTraineesForPage.push(this.trainees[num]);
+      }
+      num++;
+    }
+  }
+
+  //Switchs to next page
+  nextPage(){
+    var newPage = this.selectedPage+1;
+    if(newPage <= this.pages.length){
+      this.pageChanged(newPage)
+    }
+  }
+
+  //Switchs to last page
+  lastPage(){
+    var newPage = this.selectedPage-1;
+    if(newPage > 0){
+      this.pageChanged(newPage)
+    }
   }
 
   //This is called on the component initialization
