@@ -130,9 +130,11 @@ router.get('/findtrainees/:projectid/:idnumber/:districtid/:department/:module/:
             if (err) {
               reject(err);
             }
-            course.assimilationStatuses = courseNumber.assimilationStatuses;
-            course.assimilationDate = courseNumber.assimilationDate;
-            course.notes = courseNumber.notes;
+            course.history = courseNumber.history;
+            delete course["projectId"];
+            // course.assimilationStatuses = courseNumber.assimilationStatuses;
+            // course.assimilationDate = courseNumber.assimilationDate;
+            // course.notes = courseNumber.notes;
             newCourses.push(course);
             courseIndex++;
 
@@ -229,14 +231,21 @@ router.get('/findtrainees/:projectid/:idnumber/:districtid/:department/:module/:
 router.put('/savecourse/:traineeid', function(req, res, next) {
   var traineeId = req.params.traineeid;
   var course = req.body;
-  console.log(traineeId);
-  console.log(course);
+  // console.log(traineeId);
+  // console.log(course);
+  var history = {
+    assimilationStatuses : course.assimilationStatuses,
+    assimilationDate : course.assimilationDate,
+    notes : course.notes,
+    userId : course.userId,
+    saveDate : course.saveDate
+  }
   db.trainees.update({
     "idNumber": traineeId,
     "courses.idNumber": course.idNumber
   }, {
-    $set: {
-      "courses.$": course
+    $push: {
+      "courses.$.history": history
     }
   })
 

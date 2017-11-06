@@ -152,18 +152,11 @@
             <!--hiderow -->
             <td *ngIf="trainee.isOpen" colspan="11">
 
-              <!-- Implementation date -->
-              <div class="col-md-6 col-xs-12 form-group">
-                <label for="date" class="bold">תאריך עדכון אחרון:</label>
-                <br>
-                <input type="date" class="form-control" (change)="dateChanged($event, course)" name="date" value="{{course.assimilationDate}}" id="date">
-              </div>
-
               <!-- Course name -->
-              <div class="col-md-6 col-xs-12 form-group">
+              <div class="col-md-12 col-xs-12 form-group">
                 <!-- <label for="comments" class="bold">קורס:</label> -->
                 <br>
-                <p class="centered" style="font-size: 140%; font-weight: bold;">קורס: <u>{{course.shortName}}</u></p>
+                <h2 class="centered">קורס: <u>{{course.shortName}}</u></h2>
               </div>
 
               <!-- Proccesses table -->
@@ -172,6 +165,7 @@
                   <thead>
                     <th>שם התהליך</th>
                     <th>מצב הטמעה</th>
+                    <th>תאריך הטמעה</th>
                     <th>הערות לתהליך</th>
                   </thead>
                   <tbody>
@@ -185,19 +179,27 @@
                       <!-- Status select box -->
                       <td>
                         <div class="form-group">
-                          <select class="form-control" name="" (change)="statusChanged($event, course, i)" value={{course.assimilationStatuses[i]}}>
+                          <select class="form-control" name="" (change)="statusChanged($event, course, i)" value={{course.history[course.history.length-1].assimilationStatuses[i]}}>
                             <option value="not-selected">בחר מצב מהרשימה</option>
                             <option *ngFor='let assimilationStatus of selectedProject.assimilationStatuses'   value="{{assimilationStatus}}">{{assimilationStatus}}</option>
                           </select>
                         </div>
                       </td>
 
+                      <!-- Process Date -->
+                      <td>
+                        <div class="form-group">
+                          <input type="date" class="form-control" (change)="dateChanged($event, course, i)" name="date" value="{{course.history[course.history.length-1].assimilationDate[i]}}" id="date">
+                        </div>
+                      </td>
+
                       <!-- Proccess note -->
                       <td>
                         <div class="form-group">
-                          <textarea class="form-control" name="name" rows="5" (change)="noteChanged($event, course, i)">{{course.notes[i]}}</textarea>
+                          <textarea class="form-control" name="name" rows="5" (change)="noteChanged($event, course, i)">{{course.history[course.history.length-1].notes[i]}}</textarea>
                         </div>
                       </td>
+
 
                     </tr>
                   </tbody>

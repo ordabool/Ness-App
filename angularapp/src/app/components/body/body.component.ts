@@ -290,10 +290,13 @@ export class BodyComponent implements OnInit {
   savePerformed(trainee, course){
     var newCourse = {
       idNumber : course.idNumber,
-      assimilationStatuses : course.assimilationStatuses,
-      assimilationDate : course.assimilationDate,
-      notes : course.notes
+      assimilationStatuses : course.history[course.history.length-1].assimilationStatuses,
+      assimilationDate : course.history[course.history.length-1].assimilationDate,
+      notes : course.history[course.history.length-1].notes,
+      userId : this.user.id,
+      saveDate : new Date()
     };
+    // console.log(newCourse);
 
     this.projectService.saveCourse(trainee.idNumber, newCourse).subscribe(course => {
     });
@@ -307,15 +310,15 @@ export class BodyComponent implements OnInit {
 
   //Updates the edited course's data from the form
   noteChanged(event, course, i){
-    course.notes[i] = event.target.value;
+    course.history[course.history.length-1].notes[i] = event.target.value;
   }
 
   statusChanged(event, course, i){
-    course.assimilationStatuses[i] = event.target.value;
+    course.history[course.history.length-1].assimilationStatuses[i] = event.target.value;
   }
 
-  dateChanged(event, course){
-    course.assimilationDate = event.target.value;
+  dateChanged(event, course, i){
+    course.history[course.history.length-1].assimilationDate[i] = event.target.value;
   }
 
 
@@ -350,7 +353,7 @@ export class BodyComponent implements OnInit {
     }
   }
 
-  //This is called on the component initialization
+  //This function is called on the component initialization
   ngOnInit() {
 
   }
